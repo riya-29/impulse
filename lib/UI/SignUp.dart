@@ -1,12 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:impulse/Services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:impulse/Services/database.dart';
 import 'package:impulse/UI/VerifyScreen.dart';
 import 'package:impulse/Widgets/widgets.dart';
-import 'package:impulse/helper/authenticate.dart';
-import 'package:impulse/helper/constants.dart';
 import 'package:impulse/helper/helperFunctions.dart';
 
 import 'GlobalVars.dart';
@@ -54,7 +51,7 @@ class _SignUp extends State<Sign_Up>{
         Navigator.push(context, MaterialPageRoute(builder: (context) => VerifyScreen(email: emailTEC.text,name: nameTEC.text,username: usernameTEC.text,)));
         }else {
            final snackBar = SnackBar(content: Text("$Err"),backgroundColor: Colors.redAccent,duration: Duration(milliseconds: 2500),);
-           _scaffoldKey.currentState.showSnackBar(snackBar);
+           ScaffoldMessenger.of(context).showSnackBar(snackBar);
            setState(() {
              isLoading=false;
            });
@@ -112,10 +109,10 @@ class _SignUp extends State<Sign_Up>{
                           bool usernameTaken= await checkUsername(usernameTEC.text);
                           if(usernameTaken==false) {
                             final snackBar = SnackBar(content: Text("Username available!!"),backgroundColor: Colors.green,duration: Duration(milliseconds: 2500),);
-                            _scaffoldKey.currentState.showSnackBar(snackBar);
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           }else{
                             final snackBar = SnackBar(content: Text("Username not available!!"),backgroundColor: Colors.redAccent,duration: Duration(milliseconds: 2500),);
-                            _scaffoldKey.currentState.showSnackBar(snackBar);
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           }
                           }, icon: Icon(Icons.check_circle,size: 28,color: Colors.teal,))
                       ],
@@ -146,7 +143,7 @@ class _SignUp extends State<Sign_Up>{
                       signMeUp();
                     }else{
                       final snackBar = SnackBar(content: Text("Username not available!!"),backgroundColor: Colors.redAccent,duration: Duration(milliseconds: 2500),);
-                      _scaffoldKey.currentState.showSnackBar(snackBar);
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     }
                         },
                   child: Container(

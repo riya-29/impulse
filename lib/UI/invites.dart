@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:impulse/UI/TimeLine&Section/ViewProfile.dart';
+import 'package:flutter/services.dart';
 import 'package:impulse/helper/authenticate.dart';
 import 'package:impulse/helper/helperFunctions.dart';
 import'package:share/share.dart';
 // import 'package:impulse/dashboard.dart';
-import 'package:impulse/main.dart';
 
-import 'TimeLine&Section/editprofile.dart';
 import 'dashboard.dart';
 class InviteFriends extends StatelessWidget {
   @override
@@ -15,7 +13,7 @@ class InviteFriends extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         drawer: NavDrawer(),
-        appBar: AppBar(elevation: 0, brightness: Brightness.light, backgroundColor: Colors.teal,
+        appBar: AppBar(elevation: 0, backgroundColor: Colors.teal,
             actions: [
               Padding(
                 padding: EdgeInsets.all(4.0),
@@ -30,7 +28,7 @@ class InviteFriends extends StatelessWidget {
                                   Navigator.push(context, MaterialPageRoute(builder: (context) => Authenticate()));},),),
                         ],),
                     ]),
-              ),]),
+              ),], systemOverlayStyle: SystemUiOverlayStyle.dark),
         body: Column(
           children: [
             SizedBox(height: 30,),

@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:impulse/ProjectBank/ProjectHome.dart';
+import 'package:flutter/services.dart';
 import 'package:impulse/Services/auth.dart';
 import 'package:impulse/Services/database.dart';
 import 'package:impulse/UI/QnASection/SearchUserProfile.dart';
@@ -15,7 +14,6 @@ import '../dashboard.dart';
 import '../invites.dart';
 import '../users.dart';
 import 'editprofile.dart';
-import 'dart:math' as math;
 
 class ViewProfile extends StatefulWidget {
   @override
@@ -74,7 +72,7 @@ class _ViewProfileState extends State<ViewProfile> {
           resizeToAvoidBottomInset: false,
           backgroundColor: Colors.white,
           drawer: NavDrawer(),
-          appBar: AppBar(elevation: 0, brightness: Brightness.light, backgroundColor: Colors.teal,
+          appBar: AppBar(elevation: 0, backgroundColor: Colors.teal,
             title: GestureDetector(onTap: (){
               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>ViewProfile()));
             },
@@ -147,7 +145,7 @@ class _ViewProfileState extends State<ViewProfile> {
                     ]),
 
               ),
-            ]),
+            ], systemOverlayStyle: SystemUiOverlayStyle.dark),
           body:SingleChildScrollView(
             child: Column(children: <Widget>[
               Container(padding: EdgeInsets.symmetric(vertical: 25),
@@ -271,7 +269,7 @@ class _ViewProfileState extends State<ViewProfile> {
             SizedBox(height:20),
             Text("Username",style:TextStyle(fontWeight: FontWeight.normal, color:Colors.blueGrey, fontSize:14,)),
             SizedBox(height: 5,),
-            Text("@${username}",style:TextStyle(fontWeight: FontWeight.normal, color:Colors.black, fontSize:19,)),
+            Text("@$username",style:TextStyle(fontWeight: FontWeight.normal, color:Colors.black, fontSize:19,)),
             Divider(),
             Text("Location",style:TextStyle(fontWeight: FontWeight.normal, color:Colors.blueGrey, fontSize:14,)),
             SizedBox(height: 5,),
@@ -533,7 +531,7 @@ class _ViewProjectState extends State<ViewProject> {
               builder: (_) => AlertDialog(
                 title: Text('Delete Project'),
                 actions: <Widget>[
-                  new FlatButton(
+                  new TextButton(
                     onPressed: () {
                       FirebaseFirestore.instance.collection("ProjectBank").where("title",isEqualTo: title).where("abstract",isEqualTo:abstract).get().then((snapshot) {
                         for (DocumentSnapshot doc in snapshot.docs) {
@@ -544,11 +542,11 @@ class _ViewProjectState extends State<ViewProject> {
                       Navigator.of(context).pop();
 
                     },
-                    textColor: Colors.teal,
+                    // textColor: Colors.teal,
                     child: const Text('Yes',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),),
-                  new FlatButton(
+                  new TextButton(
                     onPressed: () {Navigator.of(context).pop();},
-                    textColor: Colors.teal,
+                    // textColor: Colors.teal,
                     child: const Text('No',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18)),
                   ),
                 ],

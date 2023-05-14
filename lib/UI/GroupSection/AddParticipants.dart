@@ -1,11 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:impulse/Services/database.dart';
 import 'package:impulse/Widgets/widgets.dart';
 import 'package:impulse/helper/constants.dart';
-import 'dart:math' as math;
 
 
 class AddParticipants extends StatefulWidget{
@@ -73,11 +70,11 @@ class _AddParticipantsState extends State<AddParticipants>{
     }
     if(member.toString().contains("${username}_${userEmail.split('@')[0]}")){
       final snackBar = SnackBar(content: Text("Already a group member!!"),backgroundColor: Colors.red,duration: Duration(milliseconds: 4000),);
-      _scaffoldKey.currentState.showSnackBar(snackBar);
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }else{
       member.add("${username}_${userEmail.split('@')[0]}");
       final snackBar = SnackBar(content: Text("Member added in group!!"),backgroundColor: Colors.green,duration: Duration(milliseconds: 4000),);
-      _scaffoldKey.currentState.showSnackBar(snackBar);
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
     Map<String,dynamic> addNewMembers = {"GName":"${widget.groupName}","Members":member};
     await FirebaseFirestore.instance.collection('Groups').doc('${widget.groupName}').update(addNewMembers);

@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:impulse/UI/QnASection/SearchUserProfile.dart';
 import 'package:impulse/UI/dashboard.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 

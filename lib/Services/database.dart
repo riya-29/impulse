@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:impulse/helper/constants.dart';
 
 class DatabaseMethods{
 
@@ -33,7 +32,7 @@ class DatabaseMethods{
   }
 
   getConversation(String RoomId) async{
-    return await FirebaseFirestore.instance.collection("ChatRoom").doc("$RoomId").collection("chats").orderBy("time",descending: true).snapshots();
+    return FirebaseFirestore.instance.collection("ChatRoom").doc("$RoomId").collection("chats").orderBy("time",descending: true).snapshots();
   }
 
   //Groups
@@ -45,14 +44,14 @@ class DatabaseMethods{
     FirebaseFirestore.instance.collection("Groups").doc("$groupName").collection("chats").add(messageMap).catchError((e){print(e.toString());});
   }
   getGroupConversation(String groupName) async{
-    return await FirebaseFirestore.instance.collection("Groups").doc("$groupName").collection("chats").orderBy("time",descending: true).snapshots();
+    return FirebaseFirestore.instance.collection("Groups").doc("$groupName").collection("chats").orderBy("time",descending: true).snapshots();
   }
   getGroupChatRooms(String userName) async{
-    return await FirebaseFirestore.instance.collection("Groups").where("Members",arrayContains: userName,).snapshots();
+    return FirebaseFirestore.instance.collection("Groups").where("Members",arrayContains: userName,).snapshots();
   }
 
   getChatRooms(String userName) async{
-    return await FirebaseFirestore.instance.collection("ChatRoom").where("users",arrayContains: userName,).snapshots();
+    return FirebaseFirestore.instance.collection("ChatRoom").where("users",arrayContains: userName,).snapshots();
   }
 }
 

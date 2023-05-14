@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:image_picker/image_picker.dart';
@@ -87,7 +86,7 @@ class _GroupInfoState extends State<GroupInfo> {
       actionsPadding: EdgeInsets.symmetric(horizontal: 35),
       title: Text('$message'),
       actions: <Widget>[
-        new FlatButton(
+        new TextButton(
           onPressed: () async {
             /*(Constants.myEmail.compareTo(admin)==0)?
             deleteMessages(widget.groupName):*/exitGroup(widget.groupName);
@@ -116,13 +115,13 @@ class _GroupInfoState extends State<GroupInfo> {
             Navigator.of(context).pop();
 
           },
-          textColor: Colors.teal,
+          // textColor: Colors.teal,
           child: const Text('Yes',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),),
-        new FlatButton(
+        new TextButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
-          textColor: Colors.teal,
+          // textColor: Colors.teal,
           child: const Text('No',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18)),
         ),
       ],
@@ -147,20 +146,20 @@ class _GroupInfoState extends State<GroupInfo> {
                       actionsPadding: EdgeInsets.symmetric(horizontal: 35),
                       title: Text('Delete Group'),
                       actions: <Widget>[
-                        new FlatButton(
+                        new TextButton(
                           onPressed: () async {
                             Navigator.of(context).pop();
                             Navigator.of(context).pop();
                             Navigator.of(context).pop();
                             await FirebaseFirestore.instance.collection('Groups').doc('${widget.groupName}').delete();
                           },
-                          textColor: Colors.teal,
+                          // textColor: Colors.teal,
                           child: const Text('Yes',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),),
-                        new FlatButton(
+                        new TextButton(
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          textColor: Colors.teal,
+                          // textColor: Colors.teal,
                           child: const Text('No',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18)),
                         ),
                       ],
@@ -309,7 +308,7 @@ class _MemberTileState extends State<MemberTile> {
             Column( crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text("${widget.memberMails[widget.index].split('_')[0]}",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 19),),
-                Text("@${username}",style: TextStyle(fontWeight: FontWeight.normal,fontSize: 18)),
+                Text("@$username",style: TextStyle(fontWeight: FontWeight.normal,fontSize: 18)),
               ],
             ),
             Spacer(),
@@ -333,7 +332,7 @@ class _MemberTileState extends State<MemberTile> {
       actionsPadding: EdgeInsets.symmetric(horizontal: 35),
       title: Text('$message'),
       actions: <Widget>[
-        new FlatButton(
+        new TextButton(
           onPressed: () {
             List<String> member=["${widget.memberMails[widget.index]}"];
             setState(() {
@@ -342,13 +341,13 @@ class _MemberTileState extends State<MemberTile> {
             Navigator.of(context).pop();
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>GroupInfo(groupName: widget.groupName,)));
           });},
-          textColor: Colors.teal,
+          // textColor: Colors.teal,
           child: const Text('Yes',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),),
-        new FlatButton(
+        new TextButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
-          textColor: Colors.teal,
+          // textColor: Colors.teal,
           child: const Text('No',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18)),
         ),
       ],
@@ -372,7 +371,7 @@ class _ViewGroupPhotoState extends State<ViewGroupPhoto> {
       "Name": widget.groupName,
       "GPhoto": GImage
     };
-    var ref = await FirebaseFirestore.instance.collection("Groups").doc("${widget.groupName}");
+    var ref = FirebaseFirestore.instance.collection("Groups").doc("${widget.groupName}");
     ref.update(imageMap);
     // final snackBar = SnackBar(content: Text("Changes Saved!!"),backgroundColor: Colors.green,duration: Duration(milliseconds: 5000),);
     // _scaffoldKey.currentState.showSnackBar(snackBar);

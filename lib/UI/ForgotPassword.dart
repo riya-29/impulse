@@ -46,7 +46,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     });
                     auth.resetPassword(emailTEC.text.trim());
                     final snackBar = SnackBar(content: Text("A link has been sent to your email to reset password."),backgroundColor: Colors.redAccent,duration: Duration(milliseconds: 5000),);
-                    _scaffoldKey.currentState.showSnackBar(snackBar);
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   }},
                 child: Container(
                   alignment:  Alignment.center,

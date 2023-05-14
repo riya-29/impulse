@@ -1,11 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:impulse/Services/database.dart';
 import 'package:impulse/UI/GroupSection/GroupInfoPage.dart';
-import 'package:impulse/UI/search.dart';
 import 'package:impulse/Widgets/widgets.dart';
 import 'package:impulse/helper/constants.dart';
 
@@ -182,20 +178,20 @@ class GroupChatWindowState extends State<GroupChatWindow>{
       actionsPadding: EdgeInsets.symmetric(horizontal: 35),
       title: Text('$message'),
       actions: <Widget>[
-        new FlatButton(
+        new TextButton(
           onPressed: () {
           (Constants.myEmail.compareTo(admin)==0)?
           deleteMessages(widget.groupName):exitGroup(widget.groupName);
           Navigator.of(context).pop();
           Navigator.of(context).pop();
           },
-          textColor: Colors.teal,
+          // textColor: Colors.teal,
           child: const Text('Yes',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),),
-        new FlatButton(
+        new TextButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
-          textColor: Colors.teal,
+          // textColor: Colors.teal,
           child: const Text('No',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18)),
         ),
       ],
@@ -283,7 +279,7 @@ class _MessageTileState extends State<MessageTile> {
                   Text("${time.split('.')[0].substring(0,time.split('.')[0].substring(0).length-3)}",style: TextStyle(color: Colors.grey.shade700,fontSize: 12),),
                 ],
               ),),
-          Text("@${username}",style: TextStyle(color: Colors.blueGrey),),
+          Text("@$username",style: TextStyle(color: Colors.blueGrey),),
         ],
       ),
     );

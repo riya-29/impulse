@@ -1,7 +1,5 @@
-import 'dart:io';
 import 'package:bordered_text/bordered_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:impulse/UI/QuizSection/Database/Services.dart';
 import 'package:impulse/helper/constants.dart';
@@ -33,7 +31,7 @@ class _Result extends State<Result> with SingleTickerProviderStateMixin{
     Map<String,dynamic> data={"Points":points,"Time":timeTaken,"Email":Constants.myEmail};
     try {
       FirebaseFirestore.instance.collection('Quiz').doc("${Constants.myEmail}").set(data);
-    } on Exception catch (e) {
+    } on Exception {
       FirebaseFirestore.instance.collection('Quiz').doc("${Constants.myEmail}").update(data);
     }
 
@@ -65,7 +63,7 @@ class _Result extends State<Result> with SingleTickerProviderStateMixin{
                       BorderedText(strokeColor:Colors.white10,strokeWidth: 6,
                           child: Text("Time Taken: ${timeTaken}s",style: TextStyle(color: Colors.white,fontSize: 28,),)),
                       SizedBox(height: 15,),
-                      FlatButton(onPressed: (){
+                      TextButton(onPressed: (){
                         addIntToSF();
                         assignQuizVariables();
                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>QuizScreen()));

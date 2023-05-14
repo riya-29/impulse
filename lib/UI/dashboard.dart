@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:impulse/NewsSection/helper/data.dart';
 import 'package:impulse/NewsSection/models/categorie_model.dart';
 import 'dart:math' as math;
@@ -171,7 +171,6 @@ class _DashboardPageState extends State<DashboardPage> {
       drawer:NavDrawer(),
       appBar: AppBar(
         elevation: 0,
-        brightness: Brightness.light,
         backgroundColor: Colors.teal,
        title: Text('App Dashboard', textAlign: TextAlign.left,
          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
@@ -233,7 +232,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   ],),
            ]),
          ),
-       ]),
+       ], systemOverlayStyle: SystemUiOverlayStyle.dark),
       backgroundColor: Colors.white,
       bottomNavigationBar: homeBottomNavigationBar(context),
       body:SingleChildScrollView(
@@ -474,11 +473,11 @@ class _NavDrawerState extends State<NavDrawer> {
         builder:(context){
           return new RatingDialog(
             image: Icon(Icons.celebration,color: Colors.red,size: 100,),
-            title:"Rate Us ",
-            message: 'Tap a star to set your rating. Add more description here if you want.',
+            title:Text("Rate Us "),
+            message: Text('Tap a star to set your rating. Add more description here if you want.'),
             onCancelled: () => print('cancelled'),
             onSubmitted: (response) {
-              int s=response.rating;
+              int s=response.rating as int;
               String c=response.comment;
               FirebaseFirestore.instance.collection('Rating').doc(Constants.myEmail).set({'Rating': s, 'Comment': c,'Email':Constants.myEmail});
               if (response.rating <=3.0) {
@@ -488,10 +487,10 @@ class _NavDrawerState extends State<NavDrawer> {
                     return AlertDialog(
                       title:Text("Write to us "),
                       actions: [
-                        FlatButton(
+                        TextButton(
                           child:Text("Get in touch"),
                           onPressed:() {Navigator.push(context, MaterialPageRoute(builder:(context)=>ContactUs()));},),
-                        FlatButton(
+                        TextButton(
                             child:Text("Cancel"),
                             onPressed:() {Navigator.pop(context);}
                             )],);
@@ -505,7 +504,7 @@ class _NavDrawerState extends State<NavDrawer> {
                       title:Text("Thanks For Rating "),
                       content:Text("For any queries do contact us"),
                     );},);}},
-            submitButton: 'Submit',
+            submitButtonText: 'Submit',
           );/*,*/
           });
     /*showDialog(

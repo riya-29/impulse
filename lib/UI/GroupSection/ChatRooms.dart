@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:impulse/Services/auth.dart';
 import 'package:impulse/Services/database.dart';
@@ -158,8 +157,8 @@ class _ChatRoomsTileState extends State<ChatRoomsTile> {
               SizedBox(width: 8,),
               Column(crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("${name}",style: TextStyle(color: Colors.black87,fontSize: 21,fontWeight: FontWeight.bold),),
-                  Text("@${username}",style: TextStyle(color: Colors.blueGrey,fontSize: 21,fontWeight: FontWeight.normal),),
+                  Text("$name",style: TextStyle(color: Colors.black87,fontSize: 21,fontWeight: FontWeight.bold),),
+                  Text("@$username",style: TextStyle(color: Colors.blueGrey,fontSize: 21,fontWeight: FontWeight.normal),),
                 ],
               )
             ],),

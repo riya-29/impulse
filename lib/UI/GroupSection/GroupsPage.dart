@@ -1,16 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:impulse/Services/auth.dart';
 import 'package:impulse/Services/database.dart';
 import 'package:impulse/UI/GroupSection/groupChatWindow.dart';
 import 'package:impulse/UI/GroupSection/searchGroups.dart';
-import 'package:impulse/UI/search.dart';
 import 'package:impulse/helper/constants.dart';
-import 'package:impulse/helper/helperFunctions.dart';
 
 import 'ChatRooms.dart';
-import 'ConversationScreen.dart';
 import 'CreateGroup.dart';
 
 class GroupChatRooms extends StatefulWidget{

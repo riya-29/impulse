@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:impulse/Model/user.dart';
 
 class News_Page extends StatefulWidget{
   News_PageState createState()=>News_PageState();
@@ -18,7 +16,7 @@ class News_PageState extends State<News_Page>{
   int c=1;
 
   getNews() async{
-    var n =await FirebaseFirestore.instance.collection("News",).doc("$Nsubject");
+    var n =FirebaseFirestore.instance.collection("News",).doc("$Nsubject");
     newsStream = n.snapshots();
     var newElement = await FirebaseFirestore.instance.collection("News").doc("$Nsubject").get();
     setState(() {

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:impulse/UI/QuizSection/Database/Services.dart';
 import 'package:impulse/UI/QuizSection/QuizScreen.dart';

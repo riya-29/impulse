@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:impulse/UI/QuizSection/quiz.dart';
-import 'package:impulse/UI/TimeLine&Section/editprofile.dart';
-import 'package:impulse/helper/authenticate.dart';
 import '../dashboard.dart';
-import '../invites.dart';
-import 'QuizScreen.dart';
 import 'ResultScreen.dart';
 
 class QuizMain extends StatelessWidget {
@@ -15,7 +12,6 @@ class QuizMain extends StatelessWidget {
       backgroundColor: Colors.white,
       drawer: NavDrawer(),
       appBar: AppBar(
-          brightness: Brightness.light,
           backgroundColor: Colors.teal,
           title: Text('Quiz me',
             textAlign: TextAlign.left,
@@ -98,7 +94,7 @@ class QuizMain extends StatelessWidget {
             child: IconButton(icon: Icon(Icons.leaderboard_rounded),onPressed: (){
               Navigator.push(context, MaterialPageRoute(builder: (context)=>Leaderboard()));
             },),)
-          ],
+          ], systemOverlayStyle: SystemUiOverlayStyle.dark,
     ),
       body: Quiz(),
     );

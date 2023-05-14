@@ -1,11 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:impulse/UI/QnASection/AnswerPage.dart';
-import 'package:impulse/UI/QnASection/AskQuestion.dart';
 import 'package:impulse/UI/QnASection/ViewUserProfile.dart';
 import 'package:impulse/UI/dashboard.dart';
-import 'package:impulse/Widgets/widgets.dart';
 import 'package:impulse/helper/constants.dart';
 
 import 'YourQuery.dart';
@@ -226,13 +223,13 @@ class _UnansweredTileState extends State<UnansweredTile> {
                 child: widget.qImage.isNotEmpty&&widget.qImage!=null?Image.network("${widget.qImage}",fit: BoxFit.cover,):Container(),),
             ),
             Row(mainAxisAlignment:MainAxisAlignment.start,children: [
-              FlatButton(onPressed: (){
+              TextButton(onPressed: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>AnswersList(question: widget.question,qImage: widget.qImage,)));
 
               },
                   child: Text("View Answers",style: TextStyle(color: Colors.teal,fontSize: 15,fontWeight: FontWeight.bold,))
               ),Spacer(),
-              widget.unanswered.compareTo("false")==0?FlatButton(onPressed: (){
+              widget.unanswered.compareTo("false")==0?TextButton(onPressed: (){
                 print(widget.unanswered);
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>AnswerPage(u_name: u_name,
                                                                                     u_username: u_username,
@@ -259,7 +256,7 @@ class PhotoView extends StatelessWidget{
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Center(child: Container(
-        child: qImage.isNotEmpty?Image.network("${qImage}"):Container(),
+        child: qImage.isNotEmpty?Image.network("$qImage"):Container(),
       ),),
     );
   }

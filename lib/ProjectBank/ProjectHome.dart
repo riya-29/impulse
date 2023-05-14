@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:impulse/Services/database.dart';
 import 'package:impulse/UI/GroupSection/ConversationScreen.dart';
-import 'package:impulse/UI/QnASection/SearchUserProfile.dart';
 import 'package:impulse/UI/QnASection/UnansweredQuestion.dart';
 import 'package:impulse/helper/constants.dart';
 class ProjectPage extends StatefulWidget {

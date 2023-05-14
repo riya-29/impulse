@@ -1,7 +1,7 @@
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:impulse/Widgets/widgets.dart';
 import 'package:impulse/helper/constants.dart';
@@ -122,12 +122,12 @@ class _EditProfileState extends State<EditProfile> {
         break;
       }
     }
-    print("${docId}");
-    var ref = await FirebaseFirestore.instance.collection("Users").doc("$docId");
+    print("$docId");
+    var ref = FirebaseFirestore.instance.collection("Users").doc("$docId");
     ref.update(profileMap);
     // print("$interest");
     final snackBar = SnackBar(content: Text("Changes Saved!!"),backgroundColor: Colors.green,duration: Duration(milliseconds: 5000),);
-    _scaffoldKey.currentState.showSnackBar(snackBar);
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   @override
@@ -137,7 +137,7 @@ class _EditProfileState extends State<EditProfile> {
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         drawer: NavDrawer(),
-        appBar: AppBar(elevation: 0, brightness: Brightness.light, backgroundColor: Colors.teal,
+        appBar: AppBar(elevation: 0, backgroundColor: Colors.teal,
             title: Text('Edit > Profile',
               textAlign: TextAlign.left,
               style: TextStyle(
@@ -219,7 +219,7 @@ class _EditProfileState extends State<EditProfile> {
                         ],
                       ),
                     ]),
-              ),]
+              ),], systemOverlayStyle: SystemUiOverlayStyle.dark
         ),
         body: Container(padding: EdgeInsets.symmetric(horizontal: 14,vertical: 10),
           alignment: Alignment.center,
@@ -266,11 +266,11 @@ class _EditProfileState extends State<EditProfile> {
                         bool usernameTaken= await checkUsername(usernameTEC.text);
                         if(usernameTaken==false||u_name.compareTo(usernameTEC.text)==0) {
                           final snackBar = SnackBar(content: Text("Username available!!"),backgroundColor: Colors.green,duration: Duration(milliseconds: 2500),);
-                          _scaffoldKey.currentState.showSnackBar(snackBar);
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         }else{
                           print("$u_name ${u_name.compareTo(usernameTEC.text)==0}");
                           final snackBar = SnackBar(content: Text("Username not available!!"),backgroundColor: Colors.redAccent,duration: Duration(milliseconds: 2500),);
-                          _scaffoldKey.currentState.showSnackBar(snackBar);
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         }
                       }, icon: Icon(Icons.check_circle,size: 28,color: Colors.teal,))
                     ],
@@ -452,14 +452,14 @@ class _EditProfileState extends State<EditProfile> {
                   ),
                   SizedBox(height:10),
                   Center(
-                    child: FlatButton(
-                        height: 50,
-                        minWidth: 120,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25),
-                        ),
+                    child: TextButton(
+                        // height: 50,
+                        // minWidth: 120,
+                        // shape: RoundedRectangleBorder(
+                        //   borderRadius: BorderRadius.circular(25),
+                        // ),
                         child: Text("Save Changes",style:TextStyle(color:Colors.white,fontSize: 15)),
-                        color: Colors.teal,
+                        // color: Colors.teal,
                         onPressed: () async{
                           bool usernameTaken;
                               if(formKey.currentState.validate()){
@@ -471,7 +471,7 @@ class _EditProfileState extends State<EditProfile> {
                                 updateProfile();
                               }else{
                                 final snackBar = SnackBar(content: Text("Username not available!!"),backgroundColor: Colors.redAccent,duration: Duration(milliseconds: 2500),);
-                                _scaffoldKey.currentState.showSnackBar(snackBar);
+                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
                               }
                         }}
                         ,),
@@ -518,7 +518,7 @@ class _EditProfileState extends State<EditProfile> {
     var permissionStatus = await Permission.photos.status;
     if (permissionStatus.isGranted){
       //Select Image
-      image = await _imagePicker.getImage(source: ImageSource.gallery);
+      image = (await _imagePicker.pickImage(source: ImageSource.gallery)) as PickedFile;
       //var file = h.File([],image.path);
       var file = i.File(image.path);
       print("xxx");
@@ -534,6 +534,22 @@ class _EditProfileState extends State<EditProfile> {
           //print("IMG$Constants.imageURL");
         });
       } else {print('No Image Path Received');}
-    } else {print('Permission not granted. Try Again with permission access');}
+    } else {
+      await Permission.photos.request();
+      askPermission();
+      //openAppSettings();
+      print('Permission not granted. Try Again with permission access');}
+  }
+}
+
+Future<bool> askPermission() async{
+  PermissionStatus status = await Permission.photos.request();
+  if(status.isDenied == true)
+  {
+    askPermission();
+  }
+  else
+  {
+    return true;
   }
 }

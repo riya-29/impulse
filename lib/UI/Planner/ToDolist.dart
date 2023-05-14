@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:impulse/Model/todo.dart';
 import 'package:impulse/Services/database-1.dart';
@@ -91,12 +90,12 @@ class _ToDoListState extends State<ToDoList> {
                       SizedBox(
                         width:MediaQuery.of(context).size.width ,
                         height:50,
-                        child: FlatButton(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
+                        child: TextButton(
+                          // shape: RoundedRectangleBorder(
+                          //   borderRadius: BorderRadius.circular(20),
+                          // ),
                           child: Text("Add",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 19),),
-                          color: Theme.of(context).primaryColor,
+                          // color: Theme.of(context).primaryColor,
                           onPressed: () async{
                             if(todoTitleController.text.isNotEmpty){
                               await DatabaseService()

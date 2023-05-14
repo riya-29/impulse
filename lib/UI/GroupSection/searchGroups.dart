@@ -1,11 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:impulse/Services/database.dart';
 import 'package:impulse/Widgets/widgets.dart';
 import 'package:impulse/helper/constants.dart';
-import 'dart:math' as math;
 
 
 class SearchGroups extends StatefulWidget{
@@ -160,7 +157,7 @@ class _SearchTileState extends State<SearchTile> {
                       fontWeight: FontWeight.bold),),
                 ],
               ),
-              Text("(Admin: @${username})",style: TextStyle(color: Colors.grey.shade600,
+              Text("(Admin: @$username)",style: TextStyle(color: Colors.grey.shade600,
                   fontSize: 18,
                   fontWeight: FontWeight.normal),),
               Text(widget.category,style: TextStyle(color: Colors.black,

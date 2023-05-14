@@ -19,7 +19,7 @@ Future<String> signInWithGoogle()async{
   name=user.displayName;
   email=user.email;
   imageURL=user.photoURL;
-  final User curentuser=await _auth.currentUser;
+  final User curentuser=_auth.currentUser;
   assert(user.uid==curentuser.uid);
   return'signInWithGoogle succeeded: $user';
 

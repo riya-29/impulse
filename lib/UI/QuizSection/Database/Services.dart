@@ -1,6 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Var.dart';
@@ -40,10 +38,10 @@ addIntToSF() async {
 getIntValuesSF() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   //Return int
-  int Q_key = prefs.getInt('Q_key');
+  int qKey = prefs.getInt('Q_key');
   //print("Q_key: $Q_key");
-  if(Q_key==null){ Question_No=1; }
-  else{ Question_No = Q_key; }
+  if(qKey==null){ Question_No=1; }
+  else{ Question_No = qKey; }
 }   //to get Question no from shared preferences
 
 assignQuizVariables()  {

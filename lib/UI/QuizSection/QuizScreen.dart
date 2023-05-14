@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:impulse/UI/QuizSection/ResultScreen.dart';
 import 'Database/Services.dart';
@@ -153,7 +152,7 @@ class _QuizScreenState extends State<QuizScreen>{
                                                   //A=!A;
 
                                               });
-                                            } on Exception catch (e) {
+                                            } on Exception {
                                               //print("A: Error${e.toString()}");
                                             }},
                                               child: A?optionContainer("A: ${correctOption(options[0])}",MediaQuery.of(context).size.width):ChangeColorA),
@@ -178,7 +177,7 @@ class _QuizScreenState extends State<QuizScreen>{
                                                 get_Question();
                                                 next=1;
                                                 //B = !B;
-                                              } on Exception catch (e) {
+                                              } on Exception {
                                                 //print("B: Error${e.toString()}");
                                               }
                                             });
@@ -234,9 +233,9 @@ class _QuizScreenState extends State<QuizScreen>{
                                       Row(mainAxisAlignment: MainAxisAlignment.end,
                                         mainAxisSize: MainAxisSize.min,
                                         children:[
-                                          PointsFlatButton(context),
+                                          PointsTextButton(context),
                                           SizedBox(width: 140,),
-                                          FlatButton(onPressed: (){if(Q_counter==10){
+                                          TextButton(onPressed: (){if(Q_counter==10){
                                             Q_counter=0;
                                           }else{
                                             Q_counter++;}
@@ -275,7 +274,7 @@ class _QuizScreenState extends State<QuizScreen>{
       } else{
         return option;
       }
-    } on Exception catch (e) {
+    } on Exception {
       // TODO
     }
   }       //To remove * from correct answer
@@ -291,11 +290,11 @@ class _QuizScreenState extends State<QuizScreen>{
         ],
       ),
       actions: <Widget>[
-        new FlatButton(
+        new TextButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
-          textColor: Theme.of(context).primaryColor,
+          // textColor: Theme.of(context).primaryColor,
           child: const Text('Close'),
         ),
       ],

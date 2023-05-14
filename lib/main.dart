@@ -5,7 +5,6 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:impulse/UI/dashboard.dart';
 import 'package:impulse/helper/authenticate.dart';
 import 'package:impulse/helper/helperFunctions.dart';
-import 'helper/authenticate.dart';
 
 bool USE_FIRESTORE_EMULATOR = false;
 

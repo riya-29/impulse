@@ -1,11 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:impulse/Services/database.dart';
 import 'package:impulse/UI/QnASection/ViewUserProfile.dart';
-import 'package:impulse/UI/search.dart';
 import 'package:impulse/Widgets/widgets.dart';
 import 'package:impulse/helper/constants.dart';
 
@@ -123,8 +119,8 @@ class Chat_WindowState extends State<Chat_Window>{
           children: [
             Column(crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("${name}",style: TextStyle(fontSize: 20),),
-                Text("@${username}",style: TextStyle(fontSize: 18,color: Colors.blueGrey.shade50),),
+                Text("$name",style: TextStyle(fontSize: 20),),
+                Text("@$username",style: TextStyle(fontSize: 18,color: Colors.blueGrey.shade50),),
               ],
             ),
           ],
@@ -209,13 +205,11 @@ class Chat_WindowState extends State<Chat_Window>{
       actionsPadding: EdgeInsets.symmetric(horizontal: 35),
       title: Text('Delete Chat'),
       actions: <Widget>[
-        new FlatButton(onPressed: () {deleteMessages(widget.chatRoomId);
+        new TextButton(onPressed: () {deleteMessages(widget.chatRoomId);
         Navigator.of(context).pop();
           },
-          textColor: Colors.teal,
           child: const Text('Yes',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),),
-        new FlatButton(onPressed: () {Navigator.of(context).pop();},
-          textColor: Colors.teal,
+        new TextButton(onPressed: () {Navigator.of(context).pop();},
           child: const Text('No',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18)),
         ),
       ],

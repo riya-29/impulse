@@ -1,11 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:impulse/Services/database.dart';
 import 'package:impulse/Widgets/widgets.dart';
 import 'package:impulse/helper/constants.dart';
-import 'dart:math' as math;
 
 import 'groupChatWindow.dart';
 
@@ -132,7 +129,7 @@ class CreateGroupState extends State<CreateGroup>{
     if(nameTaken==true){
       print("ifnameTaken$nameTaken");
       final snackBar = SnackBar(content: Text("Group Name Taken. Try another name!!"),backgroundColor: Colors.redAccent,duration: Duration(milliseconds: 5000),);
-      _scaffoldKey.currentState.showSnackBar(snackBar);
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }else{
       nameTaken=false;
       StartConversation();
@@ -239,22 +236,26 @@ class CreateGroupState extends State<CreateGroup>{
                 ],),
               SizedBox(height: 10,),
               Center(
-                child: FlatButton(height: 50, minWidth: 120,
-                  child: Text("Create Group",style:TextStyle(color:Colors.white,fontSize: 15)),
+                child: Container(
                   color: Colors.blueAccent,
-                  onPressed: (){
-                    if(formKey.currentState.validate()){
-                      setState(() {
-                        isLoading = true;
-                        checkGroupName();
-                        print("scaffnameTaken$nameTaken");
-                        // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>AddMembers()));
-                      });
+                  height: 50,
+                  child: TextButton(
 
-                      //nameTEC.text="";emailTEC.text="";subjectTEC.text="";messageTEC.text="";
-                      // final snackBar = SnackBar(content: Text("Mail Sent!!"),backgroundColor: Colors.redAccent,duration: Duration(milliseconds: 5000),);
-                      // _scaffoldKey.currentState.showSnackBar(snackBar);
-                    }},
+                    child: Text("Create Group",style:TextStyle(color:Colors.white,fontSize: 15)),
+                    onPressed: (){
+                      if(formKey.currentState.validate()){
+                        setState(() {
+                          isLoading = true;
+                          checkGroupName();
+                          print("scaffnameTaken$nameTaken");
+                          // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>AddMembers()));
+                        });
+
+                        //nameTEC.text="";emailTEC.text="";subjectTEC.text="";messageTEC.text="";
+                        // final snackBar = SnackBar(content: Text("Mail Sent!!"),backgroundColor: Colors.redAccent,duration: Duration(milliseconds: 5000),);
+                        // _scaffoldKey.currentState.showSnackBar(snackBar);
+                      }},
+                  ),
                 ),
               ),
               SizedBox(height: 20,),

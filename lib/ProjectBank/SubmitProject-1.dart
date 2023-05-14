@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:impulse/helper/constants.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -54,7 +54,7 @@ String _category;
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(title:Text("Project"),
-      elevation: 0, brightness: Brightness.light, backgroundColor: Colors.teal,),
+      elevation: 0, backgroundColor: Colors.teal, systemOverlayStyle: SystemUiOverlayStyle.dark,),
       body:SingleChildScrollView(
         child: Form(key: formKey,
           child: Padding(
@@ -140,12 +140,12 @@ String _category;
                 ),
                 SizedBox(height:20),
                 Center(
-                  child: FlatButton(height: 50, minWidth: 120,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
+                  child: TextButton(//height: 50, minWidth: 120,
+                    // shape: RoundedRectangleBorder(
+                    //   borderRadius: BorderRadius.circular(20),
+                    // ),
                     child: Text("Submit",style:TextStyle(color:Colors.white,fontSize: 15)),
-                    color: Colors.teal,
+                    // color: Colors.teal,
                     onPressed: (){
                       if(formKey.currentState.validate()){
                         setState(() {
@@ -154,7 +154,7 @@ String _category;
                         sendProject();
                         titleTEC.text="";abstarctTEC.text="";_category='';contentTEC.text="";
                         final snackBar = SnackBar(content: Text("Project uploaded!!"),backgroundColor: Colors.green,duration: Duration(milliseconds: 5000),);
-                        _scaffoldKey.currentState.showSnackBar(snackBar);
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         summaryTEC.text="";
                         setState(() {
                           imageUrl="";
@@ -179,6 +179,7 @@ String _category;
     //check for permission
     await Permission.photos.request();
     var permissionStatus=await Permission.photos.status;
+
     if(permissionStatus.isGranted){
       //select image
       image=await _picker.getImage(source: ImageSource.gallery);
@@ -195,6 +196,7 @@ String _category;
         print("no path received");
       }
     }else{
+      await Permission.photos.request();
       print("Grant Permission and try again");
     }
 

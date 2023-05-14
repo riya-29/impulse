@@ -1,16 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:impulse/ProjectBank/ProjectHome.dart';
+import 'package:flutter/services.dart';
 import 'package:impulse/Services/database.dart';
 import 'package:impulse/UI/GroupSection/ConversationScreen.dart';
-import 'package:impulse/helper/authenticate.dart';
 import 'package:impulse/helper/constants.dart';
-import '../../main.dart';
 import '../dashboard.dart';
-import '../invites.dart';
-import 'AnswerPage.dart';
 import 'SearchUserProfile.dart';
 import 'UnansweredQuestion.dart';
 
@@ -75,7 +70,7 @@ class _UserProfileState extends State<UserProfile> {
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         drawer: NavDrawer(),
-        appBar: AppBar(elevation: 0, brightness: Brightness.light, backgroundColor: Colors.teal,
+        appBar: AppBar(elevation: 0, backgroundColor: Colors.teal,
             title: Text('View > Profile', textAlign: TextAlign.left,
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),),
             leading: IconButton(onPressed: () { Navigator.pop(context);},
@@ -102,7 +97,7 @@ class _UserProfileState extends State<UserProfile> {
                     ]),
 
               ),
-            ]),
+            ], systemOverlayStyle: SystemUiOverlayStyle.dark),
 
         body:SingleChildScrollView(
           child:Column(children: <Widget>[
@@ -223,7 +218,7 @@ class _UserProfileState extends State<UserProfile> {
             SizedBox(height:20),
             Text("Username",style:TextStyle(fontWeight: FontWeight.normal, color:Colors.blueGrey, fontSize:14,)),
             SizedBox(height: 5,),
-            Text("@${username}",style:TextStyle(fontWeight: FontWeight.normal, color:Colors.black, fontSize:19,)),
+            Text("@$username",style:TextStyle(fontWeight: FontWeight.normal, color:Colors.black, fontSize:19,)),
             Divider(),
             Text("Location",style:TextStyle(fontWeight: FontWeight.normal, color:Colors.blueGrey, fontSize:14,)),
             SizedBox(height: 5,),
@@ -298,7 +293,7 @@ class _UserProfileState extends State<UserProfile> {
       actionsPadding: EdgeInsets.symmetric(horizontal: 35),
       title: Text(message),
       actions: <Widget>[
-        new FlatButton(
+        new TextButton(
           onPressed: () async {
                 var ref = await FirebaseFirestore.instance.collection('Users').doc(widget.email).get();
                 var mem=ref.get("Report").toString().replaceAll('[',"").replaceAll(']','').split(',');
@@ -320,13 +315,13 @@ class _UserProfileState extends State<UserProfile> {
                 }
               Navigator.of(context).pop();
             },
-          textColor: Colors.teal,
+          // textColor: Colors.teal,
           child: const Text('Yes',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),),
-        new FlatButton(
+        new TextButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
-          textColor: Colors.teal,
+          // textColor: Colors.teal,
           child: const Text('No',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18)),
         ),
       ],

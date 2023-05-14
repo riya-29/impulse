@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:impulse/NewsSection/helper/data.dart';
 import 'package:impulse/NewsSection/helper/widgets.dart';
 import 'package:impulse/NewsSection/models/categorie_model.dart';
-import 'package:impulse/UI/QnASection/SearchUserProfile.dart';
 import 'package:impulse/UI/dashboard.dart';
 import '../helper/news.dart';
 import 'categorie_news.dart';

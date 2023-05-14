@@ -1,4 +1,3 @@
-import 'package:impulse/helper/constants.dart';
 
 class Todo {
   String uid;

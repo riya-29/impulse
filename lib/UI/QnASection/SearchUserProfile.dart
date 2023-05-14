@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:impulse/Services/database.dart';
 import 'package:impulse/UI/GroupSection/ConversationScreen.dart';
@@ -280,7 +278,7 @@ class PostTileState extends State<PostTile> {
               builder: (_) => AlertDialog(
                 title: Text('Delete Post'),
                 actions: <Widget>[
-                  new FlatButton(
+                  new TextButton(
                     onPressed: () {
                       FirebaseFirestore.instance.collection("AskedQuestions").where("Question",isEqualTo: widget.question).where("QImage",isEqualTo:widget.qImage).get().then((snapshot) {
                         for (DocumentSnapshot doc in snapshot.docs) {
@@ -291,11 +289,11 @@ class PostTileState extends State<PostTile> {
                       Navigator.of(context).pop();
 
                     },
-                    textColor: Colors.teal,
+                    // textColor: Colors.teal,
                     child: const Text('Yes',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),),
-                  new FlatButton(
+                  new TextButton(
                     onPressed: () {Navigator.of(context).pop();},
-                    textColor: Colors.teal,
+                    // textColor: Colors.teal,
                     child: const Text('No',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18)),
                   ),
                 ],
@@ -332,13 +330,13 @@ class PostTileState extends State<PostTile> {
                   child: widget.qImage.isNotEmpty?Image.network("${widget.qImage}",fit: BoxFit.cover,):Container(),),
               ),
               Row(mainAxisAlignment:MainAxisAlignment.start,children: [
-                FlatButton(onPressed: (){
+                TextButton(onPressed: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>AnswersList(question: widget.question,qImage: widget.qImage,)));
 
                 },
                     child: Text("View Replies",style: TextStyle(color: Colors.teal,fontSize: 15,fontWeight: FontWeight.bold,))
                 ),Spacer(),
-                FlatButton(onPressed: (){
+                TextButton(onPressed: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>AnswerPage(u_name: u_name,
                     u_username: u_username,
                     u_image:u_image,

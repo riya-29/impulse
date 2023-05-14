@@ -1,16 +1,12 @@
 import 'package:auth_buttons/auth_buttons.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:impulse/Model/user.dart';
 import 'package:impulse/Services/auth.dart';
 import 'package:impulse/Services/database.dart';
 import 'package:impulse/UI/ForgotPassword.dart';
 import 'package:impulse/UI/dashboard.dart';
-import 'package:impulse/UI/google_sign_in.dart';
 import 'package:impulse/UI/users.dart';
 import 'package:impulse/Widgets/widgets.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:impulse/helper/constants.dart';
 import 'package:impulse/helper/helperFunctions.dart';
 
@@ -58,20 +54,20 @@ class _SignIn extends State<Sign_In>{
         HelperFunction.saveUserEmailSharedPreference(emailTEC.text);
       });
       authMethod.signInWithEmailAndPassword(emailTEC.text, passwordTEC.text,context).then((value) {
-        print("Value:${value}");
+        print("Value:$value");
         if (value != null) {
           String login;
           HelperFunction.saveUserLoggedInSharedPreference("true");
           HelperFunction.getUserLoggedInSharedPreference().then((val){login= val;});
-          print("Login ${login}");
+          print("Login $login");
           HelperFunction.getUserEmailSharedPreference().then((val){Constants.myEmail= val;});
-          print("Login ${login}");
+          print("Login $login");
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => DashboardPage()));
         }
         else{
           final snackBar = SnackBar(content: Text("$Err"),backgroundColor: Colors.redAccent,duration: Duration(milliseconds: 2500),);
-          _scaffoldKey.currentState.showSnackBar(snackBar);
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
         }
       });
       }
@@ -178,7 +174,7 @@ class _SignIn extends State<Sign_In>{
                   ],
                 ),
                 SizedBox(height: 10,),
-                Container(width: MediaQuery.of(context).size.width ,
+                Container(width: MediaQuery.of(context).size.width ,color: Colors.white,
                     child:GoogleAuthButton(
                       onPressed: (){
                         String docId="xx";

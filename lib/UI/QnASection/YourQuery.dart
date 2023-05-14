@@ -1,10 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:impulse/UI/QnASection/AnswerPage.dart';
 import 'package:impulse/UI/QnASection/AskQuestion.dart';
 import 'package:impulse/UI/QnASection/ViewUserProfile.dart';
-import 'package:impulse/UI/QuizSection/Database/Var.dart';
 import 'package:impulse/UI/dashboard.dart';
 import 'package:impulse/helper/constants.dart';
 
@@ -135,7 +133,7 @@ class _UnansweredTileState extends State<UnansweredTile> {
             builder: (_) => AlertDialog(
               title: Text('Delete Post'),
                 actions: <Widget>[
-                  new FlatButton(
+                  new TextButton(
                     onPressed: () {
                       FirebaseFirestore.instance.collection("AskedQuestions").where("Question",isEqualTo: widget.question).where("QImage",isEqualTo:widget.qImage).get().then((snapshot) {
                         for (DocumentSnapshot doc in snapshot.docs) {
@@ -146,11 +144,11 @@ class _UnansweredTileState extends State<UnansweredTile> {
                   Navigator.of(context).pop();
 
                   },
-                    textColor: Colors.teal,
+                    // textColor: Colors.teal,
                     child: const Text('Yes',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),),
-                  new FlatButton(
+                  new TextButton(
                     onPressed: () {Navigator.of(context).pop();},
-                    textColor: Colors.teal,
+                    // textColor: Colors.teal,
                     child: const Text('No',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18)),
                   ),
                 ],
@@ -184,13 +182,13 @@ class _UnansweredTileState extends State<UnansweredTile> {
                   child: widget.qImage.isNotEmpty?Image.network("${widget.qImage}",fit: BoxFit.cover,):Container(),),
               ),
               Row(mainAxisAlignment:MainAxisAlignment.start,children: [
-                FlatButton(onPressed: (){
+                TextButton(onPressed: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>AnswersList(question: widget.question,qImage: widget.qImage,)));
 
                 },
                     child: Text("View Answers",style: TextStyle(color: Colors.teal,fontSize: 15,fontWeight: FontWeight.bold,))
                 ),Spacer(),
-                FlatButton(onPressed: (){
+                TextButton(onPressed: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>AnswerPage(u_name: u_name,
                     u_username: u_username,
                     u_image:u_image,
@@ -273,7 +271,7 @@ class _AnswersListState extends State<AnswersList> {
           onPressed: () async {
             FirebaseFirestore.instance.collection("AskedQuestions").doc(id).update({"Unanswered":true});
             final snackBar = SnackBar(content: Text("Discussion Closed"),backgroundColor: Colors.green,duration: Duration(milliseconds: 2500),);
-            _scaffoldKey.currentState.showSnackBar(snackBar);
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
             },
           label: Text("Close Discussion"),
         ),
@@ -401,7 +399,7 @@ class PhotoView extends StatelessWidget{
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Center(child: Container(
-        child: qImage.isNotEmpty?Image.network("${qImage}"):Container(),
+        child: qImage.isNotEmpty?Image.network("$qImage"):Container(),
       ),),
     );
   }

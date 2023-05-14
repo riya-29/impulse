@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:impulse/Services/auth.dart';
 import 'package:impulse/UI/TimeLine&Section/editprofile.dart';
 import 'package:impulse/UI/users.dart';
@@ -45,7 +46,6 @@ class _ContactUsState extends State<ContactUs> {
       drawer: NavDrawer(),
 
       appBar: AppBar(elevation: 0,
-          brightness: Brightness.light,
           backgroundColor: Colors.teal,
           title: Text('Contact Us',
             textAlign: TextAlign.left,
@@ -89,7 +89,7 @@ class _ContactUsState extends State<ContactUs> {
                         )],),
                   ]),
             ),
-          ]),
+          ], systemOverlayStyle: SystemUiOverlayStyle.dark),
 
       body:SingleChildScrollView(
         child: Form(key: formKey,
@@ -145,23 +145,30 @@ class _ContactUsState extends State<ContactUs> {
             ),
              SizedBox(height:20),
              Center(
-               child: FlatButton(height: 50, minWidth: 120,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(1),
-                ),
-                child: Text("Submit",style:TextStyle(color:Colors.white,fontSize: 15)),
-                color: Colors.teal,
-                onPressed: (){
-                      if(formKey.currentState.validate()){
-                      setState(() {
-                      isLoading = true;
-                      });
-                      sendMail();
-                      nameTEC.text="";emailTEC.text="";subjectTEC.text="";messageTEC.text="";
-                      final snackBar = SnackBar(content: Text("Mail Sent!!"),backgroundColor: Colors.redAccent,duration: Duration(milliseconds: 5000),);
-                      _scaffoldKey.currentState.showSnackBar(snackBar);
-                  }},
-                ),
+               child: Container(
+                   height: 40,
+                 decoration: BoxDecoration(
+                   color: Colors.teal,
+                   borderRadius: BorderRadius.circular(5),
+                    ),
+                 child: TextButton(//height: 50, minWidth: 120,
+                  // shape: RoundedRectangleBorder(
+                  //   borderRadius: BorderRadius.circular(1),
+                  // ),
+                  child: Text("Submit",style:TextStyle(color:Colors.white,fontSize: 15)),
+                  // color: Colors.teal,
+                  onPressed: (){
+                        if(formKey.currentState.validate()){
+                        setState(() {
+                        isLoading = true;
+                        });
+                        sendMail();
+                        nameTEC.text="";emailTEC.text="";subjectTEC.text="";messageTEC.text="";
+                        final snackBar = SnackBar(content: Text("Mail Sent!!"),backgroundColor: Colors.redAccent,duration: Duration(milliseconds: 5000),);
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    }},
+                  ),
+               ),
              ),
             SizedBox(height: MediaQuery.of(context).size.height/2.5,)
           ],),

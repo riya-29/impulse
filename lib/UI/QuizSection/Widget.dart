@@ -1,8 +1,6 @@
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:impulse/UI/QuizSection/Database/Services.dart';
-import 'package:impulse/UI/QuizSection/QuizDashboard.dart';
 import 'Database/Var.dart';
 import 'QuizScreen.dart';
 import 'ResultScreen.dart';
@@ -48,7 +46,7 @@ Container optionContainer(String option,double s){
           ),
 
       child: Text("$option",style: TextStyle(color: Colors.blueGrey,fontSize: 18,fontWeight: FontWeight.bold),),);
-  } on Exception catch (e) {
+  } on Exception {
     // TODO
   }
 }
@@ -68,7 +66,7 @@ Container WrongContainer(String option,double s){
           borderRadius: BorderRadius.circular(7.0),
           color: Colors.red),
       child: Text("$option",style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.bold),),);
-  } on Exception catch (e) {
+  } on Exception {
     // TODO
   }
 }
@@ -88,12 +86,12 @@ Container RightContainer(String option,double s){
           borderRadius: BorderRadius.circular(7.0),
           color: Colors.green),
       child: Text("$option",style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.bold),),);
-  } on Exception catch (e) {
+  } on Exception {
     //print("Catch ${e.toString()}");
   }
 }
 
-FlatButton PointsFlatButton(BuildContext context){
+TextButton PointsTextButton(BuildContext context){
   sleep(Duration(milliseconds: 500));
   if(next==1){
     //print("RUN");
@@ -122,7 +120,7 @@ FlatButton PointsFlatButton(BuildContext context){
       });
     }
   }
-  return FlatButton(onPressed:(){},child: Text("  Points: $points",style: TextStyle(color: Colors.grey.shade500,fontSize: 15),));
+  return TextButton(onPressed:(){},child: Text("  Points: $points",style: TextStyle(color: Colors.grey.shade500,fontSize: 15),));
 }
 
 Widget dashboardContainer(String subject,double heightWidth,String image,){
